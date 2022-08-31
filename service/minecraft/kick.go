@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/Tnze/go-mc/chat"
 	"github.com/Tnze/go-mc/net/packet"
-	"github.com/layou233/ZBProxy/config"
+	"github.com/LittleGriseo/GriseoProxy/config"
 	"time"
 )
 
@@ -12,26 +12,17 @@ func generateKickMessage(s *config.ConfigProxyService, name packet.String) chat.
 	return chat.Message{
 		Color: chat.White,
 		Extra: []chat.Message{
-			{Bold: true, Color: chat.Red, Text: "ZB"},
-			{Bold: true, Text: "Proxy"},
+			{Bold: false, Color: chat.Blue, Text: "Griseo"},
+			{Bold: false, Text: "Proxy"},
 			{Text: " - "},
-			{Bold: true, Color: chat.Gold, Text: "Connection Rejected\n"},
+			{Bold: false, Text: "连接被拒绝！\n"},
 
-			{Text: "Your connection request is refused by ZBProxy.\n"},
-			{Text: "Reason: "},
-			{Color: chat.LightPurple, Text: "You don't have permission to access this service.\n"},
-			{Text: "Please contact the Administrators for help.\n\n"},
+			{Text: "您并没有获得此次测试的资格！\n"},
 
 			{
 				Color: chat.Gray,
-				Text: fmt.Sprintf("Timestamp: %d | Player Name: %s | Service: %s\n",
+				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
 					time.Now().UnixMilli(), name, s.Name),
-			},
-			{Text: "GitHub: "},
-			{
-				Color: chat.Aqua, UnderLined: true,
-				Text:       "https://github.com/layou233/ZBProxy",
-				ClickEvent: chat.OpenURL("https://github.com/layou233/ZBProxy"),
 			},
 		},
 	}
@@ -41,26 +32,17 @@ func generatePlayerNumberLimitExceededMessage(s *config.ConfigProxyService, name
 	return chat.Message{
 		Color: chat.White,
 		Extra: []chat.Message{
-			{Bold: true, Color: chat.Red, Text: "ZB"},
-			{Bold: true, Text: "Proxy"},
+			{Bold: false, Color: chat.Blue, Text: "Griseo"},
+			{Bold: false, Text: "Proxy"},
 			{Text: " - "},
-			{Bold: true, Color: chat.Gold, Text: "Connection Rejected\n"},
+			{Bold: false, Text: "连接被拒绝！\n"},
 
-			{Text: "Your connection request is refused by ZBProxy.\n"},
-			{Text: "Reason: "},
-			{Color: chat.LightPurple, Text: "Service online player number limitation exceeded.\n"},
-			{Text: "Please contact the Administrators for help.\n\n"},
+			{Text: "当前服务器已满人！\n"},
 
 			{
 				Color: chat.Gray,
-				Text: fmt.Sprintf("Timestamp: %d | Player Name: %s | Service: %s\n",
+				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
 					time.Now().UnixMilli(), name, s.Name),
-			},
-			{Text: "GitHub: "},
-			{
-				Color: chat.Aqua, UnderLined: true,
-				Text:       "https://github.com/layou233/ZBProxy",
-				ClickEvent: chat.OpenURL("https://github.com/layou233/ZBProxy"),
 			},
 		},
 	}
