@@ -109,22 +109,22 @@ jobs:
       run: go mod tidy
 
     - name: Build
-      run: go build -v -trimpath -ldflags "-s -w" -o ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
+      run: go build -v -trimpath -ldflags "-s -w" -o GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
 
     - name: Handle for Windows Build
       if: ${{ env.GOOS == 'windows' }}
-      run: mv ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }} ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
+      run: mv GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }} GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
 
     - name: Upload a Non-Windows Build Artifact
       uses: actions/upload-artifact@v3.1.0
       if: ${{ env.GOOS != 'windows' }}
       with:
-        name: ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
-        path: ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
+        name: GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
+        path: GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}
 
     - name: Upload a Windows Build Artifact
       uses: actions/upload-artifact@v3.1.0
       if: ${{ env.GOOS == 'windows' }}
       with:
-        name: ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
-        path: ZBProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
+        name: GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
+        path: GriseoProxy-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.goarm }}.exe
