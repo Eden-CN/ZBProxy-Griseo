@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/layou233/ZBProxy/common/rw"
+	"github.com/LittleGriseo/GriseoProxy/common/rw"
 	"io"
 	"net"
 	"strconv"
@@ -33,7 +33,7 @@ func (c Client) handshake4(r io.Reader, w io.Writer, address string) error {
 	ip := net.ParseIP(host)
 	if ip == nil || ip.To4() == nil {
 		if ip.To16() != nil {
-			return fmt.Errorf("socks: IPv6 is not supported in SOCKS verion 4/4a: %v", ip)
+			return fmt.Errorf("socks：SOCKS 版本 4/4a 不支持 IPv6: %v", ip)
 		}
 		ipList, err := net.LookupIP(host)
 		if err != nil {
@@ -44,7 +44,7 @@ func (c Client) handshake4(r io.Reader, w io.Writer, address string) error {
 				return c.request4(r, w, port, ipv4)
 			}
 		}
-		return fmt.Errorf("socks: can't resolve any IPv4 address from domain %v: %v", host, ipList)
+		return fmt.Errorf("socks：无法解析来自域的任何 IPv4 地址%v: %v", host, ipList)
 	}
 	return c.request4(r, w, port, ip.To4())
 }
@@ -79,18 +79,18 @@ func (c Client) handleResponse4(r io.Reader) error {
 		return err
 	}
 	if resp[0] != 0 && resp[0] != version4 { // compatible with nonstandard implementation
-		return fmt.Errorf("socks: expected response version 0, but got: %v", resp[0])
+		return fmt.Errorf("socks: 预期响应 0，但得到: %v", resp[0])
 	}
 	switch resp[1] {
 	case ReplyCode4Granted:
 	case ReplyCode4RejectedOrFailed:
-		return errors.New("socks: connection request rejected or failed")
+		return errors.New("socks：连接请求被拒绝或失败")
 	case ReplyCode4CannotConnectToIdentd:
-		return errors.New("socks: connection request rejected because SOCKS server cannot connect to identd on the client")
+		return errors.New("socks：连接请求被拒绝，因为 SOCKS 服务器无法连接到客户端上的 identd")
 	case ReplyCode4IdentdReportDifferentUserID:
-		return errors.New("socks: connection request rejected because the client program and identd report different user-ids")
+		return errors.New("socks：连接请求被拒绝，因为客户端程序和 identd 报告了不同的用户 ID")
 	default:
-		return fmt.Errorf("socks: unknown SOCKS 4 reply code: %v", resp[1])
+		return fmt.Errorf("socks：未知 SOCKS 4 回复代码: %v", resp[1])
 	}
 	_, err = rw.ReadBytes(r, 6)
 	if err != nil {
