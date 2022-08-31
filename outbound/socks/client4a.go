@@ -23,9 +23,9 @@ func (c Client) handshake4A(r io.Reader, w io.Writer, address string) error {
 		if ipv4 := ip.To4(); ipv4 != nil {
 			return c.request4(r, w, port, ipv4)
 		} else if ip.To16() != nil {
-			return fmt.Errorf("socks: IPv6 is not supported in SOCKS verion 4/4a: %v", ip)
+			return fmt.Errorf("socks：SOCKS 版本 4/4a 不支持 IPv6: %v", ip)
 		}
-		return fmt.Errorf("socks: unknown IP type: %v", ip)
+		return fmt.Errorf("socks: 未知的IP类型: %v", ip)
 	}
 
 	// domain
