@@ -1,0 +1,13 @@
+[Unit]
+Description=GriseoProxy Service
+Documentation=https://github.com/LittleGriseo/GriseoProxy/
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/GriseoProxy
+KillSignal=SIGTERM
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
