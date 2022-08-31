@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/fsnotify/fsnotify"
-	"github.com/layou233/ZBProxy/config"
-	"github.com/layou233/ZBProxy/console"
-	"github.com/layou233/ZBProxy/service"
-	"github.com/layou233/ZBProxy/version"
+	"github.com/LittleGriseo/GriseoProxy/config"
+	"github.com/LittleGriseo/GriseoProxy/console"
+	"github.com/LittleGriseo/GriseoProxy/service"
+	"github.com/LittleGriseo/GriseoProxy/version"
 	"log"
 	"os"
 	"os/signal"
@@ -17,14 +17,8 @@ import (
 
 func main() {
 	log.SetOutput(color.Output)
-	console.SetTitle(fmt.Sprintf("ZBProxy %v | Running...", version.Version))
-	console.Println(color.HiRedString(` ______  _____   _____   _____    _____  __    __ __    __
-|___  / |  _  \ |  _  \ |  _  \  /  _  \ \ \  / / \ \  / /
-   / /  | |_| | | |_| | | |_| |  | | | |  \ \/ /   \ \/ /`), color.HiWhiteString(`
-  / /   |  _  { |  ___/ |  _  /  | | | |   }  {     \  /
- / /__  | |_| | | |     | | \ \  | |_| |  / /\ \    / /
-/_____| |_____/ |_|     |_|  \_\ \_____/ /_/  \_\  /_/`))
-	color.HiGreen("Welcome to ZBProxy %s!\n", version.Version)
+	console.SetTitle(fmt.Sprintf("GriseoProxy %v ", version.Version))
+	color.HiGreen("欢迎使用GriseoProxy %s!\n", version.Version)
 	color.HiBlack("Build Information: %s, %s/%s\n",
 		runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	go version.CheckUpdate()
