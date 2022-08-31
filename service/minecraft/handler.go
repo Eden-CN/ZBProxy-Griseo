@@ -27,7 +27,7 @@ func badPacketPanicRecover(s *config.ConfigProxyService) {
 	// Non-Minecraft packet which uses `go-mc` packet scan method may cause panic.
 	// So a panic handler is needed.
 	if err := recover(); err != nil {
-		log.Printf(color.HiRedString("Service %s : Bad Minecraft packet was received: %v", s.Name, err))
+		log.Printf(color.HiRedString("服务 %s : 接收到一个坏的数据包: %v", s.Name, err))
 	}
 }
 
@@ -99,7 +99,7 @@ func NewConnHandler(s *config.ConfigProxyService,
 	}
 
 	if s.Minecraft.OnlineCount.EnableMaxLimit && s.Minecraft.OnlineCount.Max <= int(options.GetCount()) {
-		log.Printf("Service %s : Rejected a new Minecraft player login request due to online player number limit: %s", s.Name, playerName)
+		log.Printf("Service %s : 由于在线玩家数量限制，拒绝了新的 Minecraft 玩家登录请求: %s", s.Name, playerName)
 		conn.WritePacket(packet.Marshal(
 			0x00, // Client bound : Disconnect (login)
 			generatePlayerNumberLimitExceededMessage(s, playerName),
@@ -132,7 +132,7 @@ func NewConnHandler(s *config.ConfigProxyService,
 			}
 		}
 	}
-	log.Printf("Service %s : A new Minecraft player requested a login: %s [%s]", s.Name, playerName, accessibility)
+	log.Printf("Service %s : 一个新的玩家正在请求加入: %s [%s]", s.Name, playerName, accessibility)
 	if accessibility == "DENY" || accessibility == "REJECT" {
 		conn.WritePacket(packet.Marshal(
 			0x00, // Client bound : Disconnect (login)
@@ -145,7 +145,7 @@ func NewConnHandler(s *config.ConfigProxyService,
 
 	remote, err := options.Out.Dial("tcp", fmt.Sprintf("%v:%v", s.TargetAddress, s.TargetPort))
 	if err != nil {
-		log.Printf("Service %s : Failed to dial to target server: %v", s.Name, err.Error())
+		log.Printf("服务 %s : 拨号到目标服务器失败: %v", s.Name, err.Error())
 		conn.Close()
 		return nil, err
 	}
