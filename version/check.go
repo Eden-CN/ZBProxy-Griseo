@@ -26,8 +26,8 @@ func CheckUpdate() {
 		return
 	}
 	if strings.Contains(string(body), Version) {
-		fmt.Println("Your ZBProxy is up-to-date. Have fun!")
+		fmt.Println("你的是最新版本，好耶！")
 	} else {
-		fmt.Println("Your ZBProxy is out of date! Check for the latest version at https://github.com/layou233/ZBProxy/releases")
+		fmt.Println("你当前运行的版本不是最新版本，请前往 https://github.com/Eden-CN/ZBProxy-Griseo/releases 获取最新版本！")
 	}
 }
