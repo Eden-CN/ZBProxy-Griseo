@@ -22,7 +22,7 @@ func generateKickMessage(s *config.ConfigProxyService, name packet.String) chat.
 			{
 				Color: chat.Gray,
 				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
-					time.Now().UnixMilli(), name, s.Name),
+					 name, s.Name),
 			},
 		},
 	}
@@ -42,7 +42,7 @@ func generatePlayerNumberLimitExceededMessage(s *config.ConfigProxyService, name
 			{
 				Color: chat.Gray,
 				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
-					time.Now().UnixMilli(), name, s.Name),
+					name, s.Name),
 			},
 		},
 	}
