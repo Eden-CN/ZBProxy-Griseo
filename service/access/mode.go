@@ -17,7 +17,7 @@ func ParseAccessMode(mode string) int {
 	case "":
 		return DefaultMode
 	default:
-		log.Panicf("Unknown access control mode: %q", mode)
+		log.Panicf("未知的模式: %q", mode)
 		return 0
 	}
 }
