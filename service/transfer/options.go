@@ -1,7 +1,7 @@
 package transfer
 
 import (
-	"github.com/layou233/ZBProxy/outbound"
+	"github.com/LittleGriseo/GriseoProxy/outbound"
 	"sync/atomic"
 )
 
