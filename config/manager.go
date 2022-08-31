@@ -19,7 +19,7 @@ var (
 )
 
 func LoadConfig() {
-	configFile, err := os.ReadFile("ZBProxy.json")
+	configFile, err := os.ReadFile("config.json")
 	if err != nil {
 		if os.IsNotExist(err) {
 			log.Println("Configuration file is not exists. Generating a new one...")
@@ -41,7 +41,7 @@ success:
 }
 
 func generateDefaultConfig() {
-	file, err := os.Create("ZBProxy.json")
+	file, err := os.Create("config.json")
 	if err != nil {
 		log.Panic("Failed to create configuration file:", err.Error())
 	}
@@ -82,7 +82,7 @@ func generateDefaultConfig() {
 func LoadLists(isReload bool) bool {
 	reloadLock.Lock()
 	if isReload {
-		configFile, err := os.ReadFile("ZBProxy.json")
+		configFile, err := os.ReadFile("config.json")
 		if err != nil {
 			if os.IsNotExist(err) {
 				log.Println(color.HiRedString("Fail to reload : Configuration file is not exists."))
