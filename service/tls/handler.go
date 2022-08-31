@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/layou233/ZBProxy/common"
-	"github.com/layou233/ZBProxy/common/set"
-	"github.com/layou233/ZBProxy/config"
-	"github.com/layou233/ZBProxy/outbound"
-	"github.com/layou233/ZBProxy/service/access"
+	"github.com/LittleGriseo/GriseoProxy/common"
+	"github.com/LittleGriseo/GriseoProxy/common/set"
+	"github.com/LittleGriseo/GriseoProxy/config"
+	"github.com/LittleGriseo/GriseoProxy/outbound"
+	"github.com/LittleGriseo/GriseoProxy/service/access"
 	"net"
 )
 
