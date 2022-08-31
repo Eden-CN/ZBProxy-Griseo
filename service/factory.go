@@ -2,15 +2,15 @@ package service
 
 import (
 	"github.com/fatih/color"
-	"github.com/layou233/ZBProxy/common"
-	"github.com/layou233/ZBProxy/common/set"
-	"github.com/layou233/ZBProxy/config"
-	"github.com/layou233/ZBProxy/outbound"
-	"github.com/layou233/ZBProxy/outbound/socks"
-	"github.com/layou233/ZBProxy/service/access"
-	"github.com/layou233/ZBProxy/service/minecraft"
-	"github.com/layou233/ZBProxy/service/transfer"
-	"github.com/layou233/ZBProxy/version"
+	"github.com/LittleGriseo/GriseoProxy/common"
+	"github.com/LittleGriseo/GriseoProxy/common/set"
+	"github.com/LittleGriseo/GriseoProxy/config"
+	"github.com/LittleGriseo/GriseoProxy/outbound"
+	"github.com/LittleGriseo/GriseoProxy/outbound/socks"
+	"github.com/LittleGriseo/GriseoProxy/service/access"
+	"github.com/LittleGriseo/GriseoProxy/service/minecraft"
+	"github.com/LittleGriseo/GriseoProxy/service/transfer"
+	"github.com/LittleGriseo/GriseoProxy/version"
 	"log"
 	"net"
 	"strconv"
@@ -31,17 +31,17 @@ func StartNewService(s *config.ConfigProxyService) {
 			s.Minecraft.MotdFavicon != ""
 	)
 	if isTLSHandleNeeded && isMinecraftHandleNeeded {
-		log.Panic(color.HiRedString("Service %s: The current version can't handle TLS and Minecraft at the same time.", s.Name))
+		log.Panic(color.HiRedString("服务 %s: 当前版本无法同时处理 TLS 和 Minecraft.", s.Name))
 	}
 	flowType := getFlowType(s.Flow)
 	if flowType == -1 {
-		log.Panic(color.HiRedString("Service %s: Unknown flow type '%s'.", s.Name, s.Flow))
+		log.Panic(color.HiRedString("服务 %s: 未知流类型 '%s'.", s.Name, s.Flow))
 	}
 	if s.Minecraft.MotdFavicon == "{DEFAULT_MOTD}" {
 		s.Minecraft.MotdFavicon = minecraft.DefaultMotd
 	}
 	s.Minecraft.MotdDescription = strings.NewReplacer(
-		"{INFO}", "ZBProxy "+version.Version,
+		"{INFO}", "GriseoProxy "+version.Version,
 		"{NAME}", s.Name,
 		"{HOST}", s.TargetAddress,
 		"{PORT}", strconv.Itoa(int(s.TargetPort)),
@@ -54,7 +54,7 @@ func StartNewService(s *config.ConfigProxyService) {
 		Port: int(s.Listen),
 	})
 	if err != nil {
-		log.Panic(color.HiRedString("Service %s: Can't start listening on port %v: %v", s.Name, s.Listen, err.Error()))
+		log.Panic(color.HiRedString("服务 %s: 无法开始监听端口 %v: %v", s.Name, s.Listen, err.Error()))
 	}
 	ListenerArray = append(ListenerArray, listen) // add to ListenerArray
 
@@ -62,11 +62,11 @@ func StartNewService(s *config.ConfigProxyService) {
 	ipAccessMode := access.ParseAccessMode(s.IPAccess.Mode)
 	if ipAccessMode != access.DefaultMode { // IP access control enabled
 		if s.IPAccess.ListTags == nil {
-			log.Panic(color.HiRedString("Service %s: ListTags can't be null when access control enabled.", s.Name))
+			log.Panic(color.HiRedString("服务 %s: 启用访问控制后，ListTags 不能为空。", s.Name))
 		}
 		for _, tag := range s.IPAccess.ListTags {
 			if common.GetSecond[error](access.GetTargetList(tag)) != nil {
-				log.Panic(color.HiRedString("Service %s: %s", s.Name, err.Error()))
+				log.Panic(color.HiRedString("服务 %s: %s", s.Name, err.Error()))
 			}
 		}
 	}
@@ -75,7 +75,7 @@ func StartNewService(s *config.ConfigProxyService) {
 	mcNameAccessMode := access.ParseAccessMode(s.Minecraft.NameAccess.Mode)
 	if isMinecraftHandleNeeded && mcNameAccessMode != access.DefaultMode { // IP access control enabled
 		if s.Minecraft.NameAccess.ListTags == nil {
-			log.Panic(color.HiRedString("Service %s: ListTags can't be null when access control enabled.", s.Name))
+			log.Panic(color.HiRedString("服务 %s: 启用访问控制后，ListTags 不能为空。", s.Name))
 		}
 		for _, tag := range s.Minecraft.NameAccess.ListTags {
 			if common.GetSecond[error](access.GetTargetList(tag)) != nil {
