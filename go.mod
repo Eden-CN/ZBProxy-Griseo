@@ -1,4 +1,4 @@
-module github.com/layou233/ZBProxy
+module github.com/LittleGriseo/GriseoProxy
 
 go 1.18
 
