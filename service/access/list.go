@@ -2,8 +2,8 @@ package access
 
 import (
 	"fmt"
-	"github.com/layou233/ZBProxy/common/set"
-	"github.com/layou233/ZBProxy/config"
+	"github.com/LittleGriseo/GriseoProxy/common/set"
+	"github.com/LittleGriseo/GriseoProxy/config"
 )
 
 func GetTargetList(listName string) (*set.StringSet, error) {
