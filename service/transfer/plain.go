@@ -34,7 +34,7 @@ func SimpleTransfer(a, b net.Conn, flow int) {
 
 	case FLOW_LINUX_ZEROCOPY:
 		if runtime.GOOS != "linux" {
-			log.Panic(color.HiRedString("Only Linux based systems support Linux ZeroCopy, please set your flow to origin or auto."))
+			log.Panic(color.HiRedString("只有基于 Linux 的系统支持 Linux ZeroCopy，请将您的流程设置为 origin 或 auto。"))
 		}
 		fallthrough
 
