@@ -39,7 +39,7 @@ func generateMotdPacket(protocolVersion int, s *config.ConfigProxyService, optio
 			Name     string `json:"name"`
 			Protocol int    `json:"protocol"`
 		}{
-			Name:     "ZBProxy " + version.Version,
+			Name:     "GriseoProxy " + version.Version,
 			Protocol: protocolVersion,
 		},
 		Players: struct {
