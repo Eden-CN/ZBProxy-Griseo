@@ -9,12 +9,12 @@ import (
 )
 
 func printErr(err error) {
-	log.Printf("Error to check for update, caution: %v.", err.Error())
-	log.Println(`You can check it yourself at https://github.com/layou233/ZBProxy/releases`)
+	log.Printf("检查更新时发生错误, caution: %v.", err.Error())
+	log.Println(`你可以尝试在这里查询最新版本 https://github.com/Eden-CN/ZBProxy-Griseo/releases`)
 }
 
 func CheckUpdate() {
-	resp, err := http.Get(`https://cdn.jsdelivr.net/gh/layou233/ZBProxy@master/version/version.go`)
+	resp, err := http.Get(`https://cdn.jsdelivr.net/gh/Eden-CN/ZBProxy-Griseo@master/version/version.go`)
 	if err != nil {
 		printErr(err)
 		return
