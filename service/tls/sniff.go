@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"github.com/layou233/ZBProxy/common/rw"
+	"github.com/LittleGriseo/GriseoProxy/common/rw"
 	"github.com/xtls/xray-core/common/protocol/tls"
 	"net"
 )
