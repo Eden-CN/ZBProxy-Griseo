@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/fatih/color"
 	"github.com/fsnotify/fsnotify"
-	"github.com/layou233/ZBProxy/common/set"
+	"github.com/LittleGriseo/GriseoProxy/common/set"
 	"log"
 	"os"
 	"runtime"
@@ -22,28 +22,28 @@ func LoadConfig() {
 	configFile, err := os.ReadFile("config.json")
 	if err != nil {
 		if os.IsNotExist(err) {
-			log.Println("Configuration file is not exists. Generating a new one...")
+			log.Println("配置文件不存在。 生成一个新的配置文件中...")
 			generateDefaultConfig()
 			goto success
 		} else {
-			log.Panic(color.HiRedString("Unexpected error when loading config: %s", err.Error()))
+			log.Panic(color.HiRedString("加载配置时出现意外错误: %s", err.Error()))
 		}
 	}
 
 	err = json.Unmarshal(configFile, &Config)
 	if err != nil {
-		log.Panic(color.HiRedString("Config format error: %s", err.Error()))
+		log.Panic(color.HiRedString("配置格式错误: %s", err.Error()))
 	}
 
 success:
 	LoadLists(false)
-	log.Println(color.HiYellowString("Successfully loaded config from file."))
+	log.Println(color.HiYellowString("已成功载入配置文件!"))
 }
 
 func generateDefaultConfig() {
 	file, err := os.Create("config.json")
 	if err != nil {
-		log.Panic("Failed to create configuration file:", err.Error())
+		log.Panic("创建配置文件失败：", err.Error())
 	}
 	Config = configMain{
 		Services: []*ConfigProxyService{
@@ -75,7 +75,7 @@ func generateDefaultConfig() {
 	_, err = file.WriteString(strings.ReplaceAll(string(newConfig), "\n", "\r\n"))
 	file.Close()
 	if err != nil {
-		log.Panic("Failed to save configuration file:", err.Error())
+		log.Panic("保存配置文件失败:", err.Error())
 	}
 }
 
@@ -85,9 +85,9 @@ func LoadLists(isReload bool) bool {
 		configFile, err := os.ReadFile("config.json")
 		if err != nil {
 			if os.IsNotExist(err) {
-				log.Println(color.HiRedString("Fail to reload : Configuration file is not exists."))
+				log.Println(color.HiRedString("重新加载失败：配置文件不存在。"))
 			} else {
-				log.Println(color.HiRedString("Unexpected error when reloading config: %s", err.Error()))
+				log.Println(color.HiRedString("重新加载配置时出现意外错误: %s", err.Error()))
 			}
 			reloadLock.Unlock()
 			return false
@@ -95,7 +95,7 @@ func LoadLists(isReload bool) bool {
 
 		err = json.Unmarshal(configFile, &Config)
 		if err != nil {
-			log.Println(color.HiRedString("Fail to reload : Config format error: %s", err.Error()))
+			log.Println(color.HiRedString("无法重新加载：配置格式错误: %s", err.Error()))
 			reloadLock.Unlock()
 			return false
 		}
@@ -126,18 +126,18 @@ func MonitorConfig(watcher *fsnotify.Watcher) error {
 					continue
 				}
 				if event.Op&fsnotify.Write == fsnotify.Write { // config reload
-					log.Println(color.HiMagentaString("Config Reload : file change detected. Reloading..."))
+					log.Println(color.HiMagentaString("配置重新加载：检测到文件更改。 正在重新加载..."))
 					if LoadLists(true) { // reload success
-						log.Println(color.HiMagentaString("Config Reload : Successfully reloaded Lists."))
+						log.Println(color.HiMagentaString("配置重新加载：成功重新加载列表。"))
 					} else {
-						log.Println(color.HiMagentaString("Config Reload : Failed to reload Lists."))
+						log.Println(color.HiMagentaString("配置重新加载：无法重新加载列表。"))
 					}
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
 					continue
 				}
-				log.Println(color.HiRedString("Config Reload Error : ", err))
+				log.Println(color.HiRedString("配置重新加载错误 : ", err))
 			}
 		}
 	}()
