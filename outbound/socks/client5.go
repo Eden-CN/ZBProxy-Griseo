@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/layou233/ZBProxy/common/rw"
+	"github.com/LittleGriseo/GriseoProxy/common/rw"
 	"io"
 	"net"
 	"strconv"
