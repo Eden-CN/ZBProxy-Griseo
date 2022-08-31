@@ -18,12 +18,6 @@ func generateKickMessage(s *config.ConfigProxyService, name packet.String) chat.
 			{Bold: false, Text: "连接被拒绝！\n"},
 
 			{Text: "您并没有获得此次测试的资格！\n"},
-
-			{
-				Color: chat.Gray,
-				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
-					 , name, s.Name),
-			},
 		},
 	}
 }
@@ -38,12 +32,6 @@ func generatePlayerNumberLimitExceededMessage(s *config.ConfigProxyService, name
 			{Bold: false, Text: "连接被拒绝！\n"},
 
 			{Text: "当前服务器已满人！\n"},
-
-			{
-				Color: chat.Gray,
-				Text: fmt.Sprintf(" 游戏ID : %s | 当前服务: %s\n",
-					, name, s.Name),
-			},
 		},
 	}
 }
